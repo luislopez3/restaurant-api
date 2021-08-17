@@ -3,6 +3,7 @@ const cors = require("cors");
 const app = express();
 const menusRouter = require("./app/routes/menu.routes");
 const ordersRouter = require("./app/routes/orders.routes");
+const orderItemsRouter = require("./app/routes/order_items.routes");
 
 const corsOptions = {
   origin: "http://localhost:5000",
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(cors(corsOptions));
 app.use("/menus", menusRouter);
 app.use("/orders", ordersRouter);
+app.use("/order_items", orderItemsRouter);
 
 // routes
 require("./app/routes/auth.routes")(app);

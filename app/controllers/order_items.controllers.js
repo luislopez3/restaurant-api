@@ -1,4 +1,4 @@
-const ordersServices = require("../services/orders.services");
+const orderItemsServices = require("../services/order_items.services");
 
 // Check for required ID in body object
 function checkId(req, res, next) {
@@ -21,33 +21,30 @@ function checkName(req, res, next) {
 // Get
 async function list(req, res, next) {
   const db = req.app.get("db");
-  const orders = await ordersServices.getOrders(db);
-  res.json(orders);
+  const orderItems = await orderItemsServices.getOrderItems(db);
+  res.json(orderItems);
 }
 
 // Post
 async function create(req, res, next) {
   const db = req.app.get("db");
   const { id, name } = req.body;
-  const order = {
+  const orderItems = {
     id,
-    address,
-    phone_number,
-    user_id,
-    total_price,
-    ordered_at,
-    status,
-    payment_method,
+    order_id,
+    item_id,
+    quantity,
+    price,
   };
-  const newOrder = await ordersServices.createOrder(db, order);
-  res.status(201).json(newOrder);
+  const newOrderItems = await orderItemsServices.createOrderItems(db, order);
+  res.status(201).json(newOrderItems);
 }
 
 // Get by ID
 async function read(req, res, next) {
   const id = parseInt(req.params.id);
   const db = req.app.get("db");
-  const found = await ordersServices.getOrder(db, id);
+  const found = await orderItemsServices.getOrderItems(db, id);
   if (!found) {
     return res.sendStatus(404);
   }
@@ -59,25 +56,22 @@ async function update(req, res, next) {
   const id = parseInt(req.params.id);
   const db = req.app.get("db");
   const { name } = req.body;
-  const order = {
+  const orderItems = {
     id,
-    address,
-    phone_number,
-    user_id,
-    total_price,
-    ordered_at,
-    status,
-    payment_method,
+    order_id,
+    item_id,
+    quantity,
+    price,
   };
-  const updatedOrder = await ordersServices.updateOrder(db, id, order);
+  const updatedOrder = await orderItemsServices.updateOrderItems(db, id, order);
   res.json(updatedOrder);
 }
 
 // Delete by ID
-async function deleteOrder(req, res, next) {
+async function deleteOrderItems(req, res, next) {
   const id = parseInt(req.params.id);
   const db = req.app.get("db");
-  await ordersServices.deleteOrder(db, id);
+  await orderItemsServices.deleteOrderItems(db, id);
   res.sendStatus(204);
 }
 
@@ -86,5 +80,5 @@ module.exports = {
   create: [checkName, create],
   read: [checkId, read],
   update: [checkId, checkName, update],
-  delete: [checkId, deleteOrder],
+  delete: [checkId, deleteOrderItems],
 };
