@@ -1,7 +1,8 @@
 const express = require("express");
 const cors = require("cors");
-
 const app = express();
+const menusRouter = require("./app/routes/menu.routes");
+const ordersRouter = require("./app/routes/orders.routes");
 
 const corsOptions = {
   origin: "http://localhost:5000",
@@ -9,12 +10,16 @@ const corsOptions = {
 
 app.use(express.json());
 app.use(cors(corsOptions));
+app.use("/menus", menusRouter);
+app.use("/orders", ordersRouter);
 
 // routes
 require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
 
 const connection = require("./knexfile")[process.env.NODE_ENV || "development"];
+
+
 const db = require("knex")(connection);
 console.log(connection);
 app.set("db", db);
