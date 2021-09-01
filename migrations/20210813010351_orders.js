@@ -3,6 +3,7 @@ exports.up = function (knex) {
       table.increments("id");
       table.string("name");
       table.string("address");
+      table.string("email");
       table.string("phone_number");
       table.integer("user_id").references("users.id");
       table.integer("total_price");
