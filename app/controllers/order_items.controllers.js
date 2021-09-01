@@ -1,4 +1,5 @@
 const orderItemsServices = require("../services/order_items.services");
+const OrdersServices = require("../services/orders.services");
 
 // Check for required ID in body object
 function checkId(req, res, next) {
@@ -28,15 +29,18 @@ async function list(req, res, next) {
 // Post
 async function create(req, res, next) {
   const db = req.app.get("db");
-  const { id, name } = req.body;
-  const orderItems = {
-    id,
+  let { id, order_id, quantity = 1, price } = req.body;
+  if (!order_id) {
+   const order = await OrdersServices.createOrder(db, {status: "open"})
+    order_id = order.id
+  }
+  const orderItem = {
     order_id,
-    item_id,
+    item_id: id,
     quantity,
     price,
   };
-  const newOrderItems = await orderItemsServices.createOrderItems(db, order);
+  const newOrderItems = await orderItemsServices.createOrderItems(db, orderItem);
   res.status(201).json(newOrderItems);
 }
 
@@ -55,15 +59,8 @@ async function read(req, res, next) {
 async function update(req, res, next) {
   const id = parseInt(req.params.id);
   const db = req.app.get("db");
-  const { name } = req.body;
-  const orderItems = {
-    id,
-    order_id,
-    item_id,
-    quantity,
-    price,
-  };
-  const updatedOrder = await orderItemsServices.updateOrderItems(db, id, order);
+  const { quantity } = req.body;
+  const updatedOrder = await orderItemsServices.updateOrderItems(db, id, quantity);
   res.json(updatedOrder);
 }
 
@@ -79,6 +76,6 @@ module.exports = {
   list: [list],
   create: [checkName, create],
   read: [checkId, read],
-  update: [checkId, checkName, update],
+  update: [checkId, update],
   delete: [checkId, deleteOrderItems],
 };

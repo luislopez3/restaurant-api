@@ -58,15 +58,14 @@ async function read(req, res, next) {
 async function update(req, res, next) {
   const id = parseInt(req.params.id);
   const db = req.app.get("db");
-  const { name } = req.body;
+  const { name, address, phone_number, status, total_price, payment_method } = req.body;
   const order = {
-    id,
+    name,
     address,
     phone_number,
-    user_id,
-    total_price,
-    ordered_at,
     status,
+    total_price,
+    ordered_at: new Date(),
     payment_method,
   };
   const updatedOrder = await ordersServices.updateOrder(db, id, order);

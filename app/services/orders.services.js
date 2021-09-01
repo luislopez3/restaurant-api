@@ -5,6 +5,11 @@ const OrdersServices = {
   getOrder(db, id) {
     return db("orders").select("*").where("id", id).first();
   },
+
+  getOpenOrders(db, user_id) {
+    return db("orders").select("*").where("status", "open").where("user_id", user_id).first();
+  },
+
   createOrder(db, order) {
     return db("orders")
       .insert(order)

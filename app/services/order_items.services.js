@@ -3,7 +3,12 @@ const OrderItemsServices = {
     return db("order_items").select("*");
   },
   getOrderItems(db, id) {
-    return db("order_items").select("*").where("order_id", id).first();
+    return db("order_items")
+      .select(
+        "order_items.*", "menu_items.name" ,"menu_items.image_url", "menu_items.type"
+      )
+      .join("menu_items", "menu_items.id", "order_items.item_id")
+      .where("order_id", id);
   },
   createOrderItems(db, orderItems) {
     return db("order_items")
@@ -11,8 +16,8 @@ const OrderItemsServices = {
       .returning("*")
       .then((data) => data[0]);
   },
-  updateOrderItems(db, id, orderItems) {
-    return db("order_items").where("id", id).update(orderItems);
+  updateOrderItems(db, id, quantity) {
+    return db("order_items").where("id", id).update({ quantity });
   },
   deleteOrderItems(db, id) {
     return db("order_items").where("id", id).del();
