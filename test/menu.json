@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "name": "Triple C Traditional",
+        "type": "Breakfast",
+        "description": "2 eggs, w/ thick cut bacon, hash browns, toast & local jam",
+        "image_url": "https://images.pexels.com/photos/5840096/pexels-photo-5840096.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+        "price": 11
+    },
+    {
+        "id": 2,
+        "name": "Buttermilk Pancakes",
+        "type": "Breakfast",
+        "description": "made from scratch daily",
+        "image_url": "https://images.pexels.com/photos/6529790/pexels-photo-6529790.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+        "price": 3
+    }
+]

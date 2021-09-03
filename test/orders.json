@@ -1,0 +1,14 @@
+[
+  {
+    "id": "7",
+    "name": "Luis Lopez",
+    "address": "4405 Santo Domingo St., Unit A",
+    "email": "llopez1518@gmail.com",
+    "phone_number": "5055700694",
+    "user_id": "null",
+    "total_price": "24.15",
+    "ordered_at": "2021-08-31",
+    "status": "active",
+    "payment_method": "null"
+  }
+]
