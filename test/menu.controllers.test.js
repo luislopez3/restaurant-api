@@ -25,7 +25,7 @@ describe("create", function () {
 
   it("should get the menu by type", function () {
     return chai.request(app)
-    .get("/restaurant")
+    .get("/menu_items")
     .then((res) => {
       console.log(res.body)
       expect(res).to.have.status(200)

@@ -3,8 +3,8 @@ const chai = require("chai");
 const chaiHttp = require("chai-http");
 const app = require("../app");
 const connection = require("../knexfile")["test"];
-const orderData = require("./order.json");
-const { seedData, cleanData } = require("./helpers");
+const orderData = require("./orders.json");
+const { seedData, cleanData } = require("./orders.helpers");
 
 chai.use(chaiHttp);
 
@@ -24,7 +24,6 @@ describe("create", function () {
 
   it("should create a new order", function () {
     const newOrder = { 
-        id,
         name,
         address,
         email,
@@ -36,7 +35,7 @@ describe("create", function () {
         payment_method };
     return chai
       .request(app)
-      .post("/restaurant")
+      .post("/")
       .send(newOrder)
       .then((res) => {
         console.log(res.body);

@@ -11,6 +11,5 @@ ordersRouter
   .route("/:id")
   .get(ordersController.read)
   .patch(ordersController.update)
-  .delete(ordersController.delete);
 
 module.exports = ordersRouter;

@@ -65,18 +65,10 @@ async function update(req, res, next) {
   res.json(updatedOrder);
 }
 
-// Delete by ID
-async function deleteOrder(req, res, next) {
-  const id = parseInt(req.params.id);
-  const db = req.app.get("db");
-  await ordersServices.deleteOrder(db, id);
-  res.sendStatus(204);
-}
 
 module.exports = {
   list: [list],
   create: [create],
   read: [checkId, read],
   update: [checkId, update],
-  delete: [checkId, deleteOrder],
 };
