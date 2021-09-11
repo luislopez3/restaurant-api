@@ -17,24 +17,6 @@ async function list(req, res, next) {
   res.json(orders);
 }
 
-// Post
-async function create(req, res, next) {
-  const db = req.app.get("db");
-  const { id, name } = req.body;
-  const order = {
-    id,
-    address,
-    phone_number,
-    user_id,
-    total_price,
-    ordered_at,
-    status,
-    payment_method,
-  };
-  const newOrder = await ordersServices.createOrder(db, order);
-  res.status(201).json(newOrder);
-}
-
 // Get by ID
 async function read(req, res, next) {
   const id = parseInt(req.params.id);
@@ -50,7 +32,7 @@ async function read(req, res, next) {
 async function update(req, res, next) {
   const id = parseInt(req.params.id);
   const db = req.app.get("db");
-  const { name, address, email, phone_number, status, total_price, payment_method } = req.body;
+  const { name, address, email, phone_number, status, total_price } = req.body;
   const order = {
     name,
     address,
@@ -59,16 +41,24 @@ async function update(req, res, next) {
     status,
     total_price,
     ordered_at: new Date(),
-    payment_method,
   };
-  const updatedOrder = await ordersServices.updateOrder(db, id, order);
-  res.json(updatedOrder);
+  try {
+     await ordersServices.updateOrder(db, id, order);
+     const updatedOrder = await ordersServices.getOrder(db, id)
+     console.log(updatedOrder, "hello world", id)
+    res.json(updatedOrder);
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500)
+    .send(err.message)
+  }
+  
 }
 
 
 module.exports = {
   list: [list],
-  create: [create],
   read: [checkId, read],
   update: [checkId, update],
 };

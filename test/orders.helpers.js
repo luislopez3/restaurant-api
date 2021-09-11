@@ -1,13 +1,11 @@
-
-
-  const menuData = require("./menu.json")
+const orderData = require("./orders.json")
 
 const seedData = async (db) => {
-    await db("menu").insert(menuData)
+    await db("orders").insert(orderData)
 } 
 
 const cleanData = async (db) => {
-    await db("menu").truncate()
+    await db("orders").truncate()
 }
 
 module.exports = {

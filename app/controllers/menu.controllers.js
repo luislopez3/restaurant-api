@@ -2,7 +2,7 @@ const menuServices = require("../services/menu.services");
 
 // Get menu by type
 async function list(req, res, next) {
-  const type = req.query.type;
+  const type = req.query.type || "Breakfast";
   const db = req.app.get("db");
   const found = await menuServices.getMenu(db, type);
   if (!found) {

@@ -11,14 +11,6 @@ function checkId(req, res, next) {
   next();
 }
 
-// Check for required Name in body object
-function checkName(req, res, next) {
-  if (!req.body.name) {
-    next("Name is required in the body");
-  }
-  next();
-}
-
 // Get
 async function list(req, res, next) {
   const db = req.app.get("db");
@@ -74,7 +66,7 @@ async function deleteOrderItems(req, res, next) {
 
 module.exports = {
   list: [list],
-  create: [checkName, create],
+  create: [create],
   read: [checkId, read],
   update: [checkId, update],
   delete: [checkId, deleteOrderItems],

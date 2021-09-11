@@ -21,8 +21,4 @@ app.use("/menu_items", menusRouter);
 app.use("/orders", ordersRouter);
 app.use("/order_items", orderItemsRouter);
 
-// routes
-require("./app/routes/auth.routes")(app);
-require("./app/routes/user.routes")(app);
-
 module.exports = app;

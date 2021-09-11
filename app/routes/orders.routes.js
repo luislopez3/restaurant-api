@@ -5,7 +5,6 @@ const ordersRouter = express.Router();
 ordersRouter
   .route("/")
   .get(ordersController.list)
-  .post(ordersController.create);
 
 ordersRouter
   .route("/:id")
