@@ -1,14 +1,12 @@
 const OrderItemsServices = {
-  getOrderItems(db) {
-    return db("order_items").select("*");
-  },
   getOrderItems(db, id) {
     return db("order_items")
       .select(
         "order_items.*", "menu_items.name" ,"menu_items.image_url", "menu_items.type"
       )
       .join("menu_items", "menu_items.id", "order_items.item_id")
-      .where("order_id", id);
+      .where("order_id", id)
+      .orderBy("menu_items.name");
   },
   createOrderItems(db, orderItems) {
     return db("order_items")
