@@ -8,7 +8,7 @@ const ordersRouter = require("./app/routes/orders.routes");
 const orderItemsRouter = require("./app/routes/order_items.routes");
 
 const corsOptions = {
-  origin: "https://reastaurant-app.herokuapp.com",
+  //origin: "http://localhost:5000",
 };
 
 // Middlewares
