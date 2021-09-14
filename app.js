@@ -14,7 +14,6 @@ const corsOptions = {
 // Middlewares
 app.use(morgan("common"));
 app.use(helmet());
-
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use("/menu_items", menusRouter);
