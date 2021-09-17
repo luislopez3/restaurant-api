@@ -5,7 +5,7 @@ exports.up = function (knex) {
       table.string("address");
       table.string("email");
       table.string("phone_number");
-      table.integer("total_price");
+      table.numeric("total_price");
       table.date("ordered_at");
       table.string("status");
     });

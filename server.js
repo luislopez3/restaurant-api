@@ -3,7 +3,7 @@ const app = require("./app")
 const connection = require("./knexfile")[process.env.NODE_ENV || "production"];
 
 const db = require("knex")(connection);
-console.log(connection);
+console.log(connection, process.env.NODE_ENV);
 app.set("db", db);
 
 // set port, listen for requests
